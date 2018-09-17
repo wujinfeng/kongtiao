@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- The above 2 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Note there is no responsive meta tag here -->
+    <link rel="icon" href="favicon.ico">
+    <title>Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/css/non-responsive.css" rel="stylesheet">
+    <link href="/css/comm.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
+        <div id="navbar">
+            <ul class="nav navbar-nav">
+                <li class="<%= nav==='home'? 'active': ''%>"><a href="/">首页</a></li>
+                <li><a href="#">暖通资讯</a></li>
+                <li><a href="#">空调品牌</a></li>
+                <li class="<%= nav==='about'? 'active': ''%>"><a href="/about">联系我们</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <% if(session.user){ %>
+                <li><a href="/login"><%=session.user.email%></a></li>
+                <li><a href="/logout">退出</a></li>
+                <%}else{%>
+                <li><a href="/login">登录</a></li>
+                <li><a href="/register">注册</a></li>
+                <%}%>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+<%- body %>
+</div>
+<footer>
+    <div class="footer">
+        <p>&copy;少愚暖通商贸工作室 版权所有 <a href="/copyright">版权声明</a></p>
+        <p>公安机关备案号：42010402000875｜备案号：鄂ICP备17002654号-2</p>
+        <p>联系方式：565032474@qq.com</p>
+    </div>
+</footer>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/js/comm.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+.ad, .query, .brand, .links, .news {
+    /*margin-top:10px;*/
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.alert-title {
+    margin-top: 10px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    font-size: 17px;
+    text-indent: 10px;
+    background-color: #00bbe5;
+    border-color: #d6e9c6;
+}
+
+.click-feed {
+    margin-top: 10px;
+}
+
+.click-feed a {
+    color: #999;
+}
+
+.query-input {
+    margin-bottom: 30px;
+}
+
+.query-result li {
+    cursor: pointer;
+}
+
+.theme-color {
+    color: #00bbe5;
+}
+
+.btn-active, .btn-default:active {
+    color: #fff;
+    background-color: #00bbe5;
+}
+
+.btn-default:active, .btn:active {
+    color: #fff;
+    background-color: #00bbe5;
+}
+
+.btn-default:hover {
+    color: #fff;
+    background-color: #00bbe5;
+}
+
+.input-group-lg > .form-control, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .btn, .btn {
+    border-radius: 0;
+}
+
+.query-type {
+    border-bottom: 1px solid transparent;
+}
+
+/*新闻资讯*/
+.media {
+    border-bottom: 1px dotted #ccc;
+}
+
+.media-left img {
+    width: 200px;
+    height: 150px;
+}
+
+.media-body .media-heading {
+    color: #00bbe5;
+    margin-top: 10px;
+}
+
+.media-body p.content {
+    color: #666;
+    height: 75px;
+    line-height: 1.8;
+    overflow: hidden;
+}
+
+/*品牌推荐*/
+.brand {
+
+}
+
+/*友情链接*/
+.links {
+
+}
+
+.footer {
+    margin-top: 10px;
+    text-align: center;
+    color: #777;
+}
+
+/*登录*/
+.login{
+    margin-top:200px;
+    margin-bottom: 200px;
+}
