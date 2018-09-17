@@ -39,9 +39,9 @@
                 <li class="<%= nav==='about'? 'active': ''%>"><a href="/about">联系我们</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <% if(session.user){ %>
-                <li><a href="/login"><%=session.user.email%></a></li>
-                <li><a href="/logout">退出</a></li>
+                <% if(user){ %>
+                <li><a href="/login">欢迎您：<%=user%></a></li>
+
                 <%}else{%>
                 <li><a href="/login">登录</a></li>
                 <li><a href="/register">注册</a></li>

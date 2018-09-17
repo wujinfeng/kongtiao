@@ -25,13 +25,9 @@ app.use(logger((str, args) => {
 app.use(helmet());
 app.use(compress());
 app.use(koaStatic(__dirname + '/public'));
-
 app.keys = ['somesdfsdfsdf'];
 const CONFIG = {
-    key: 'koa:sess', /** (string) cookie key (default is koa:sess) */
-    /** (number || 'session') maxAge in ms (default is 1 days) */
-    /** 'session' will result in a cookie that expires when session/browser is closed */
-    /** Warning: If a session cookie is stolen, this cookie will never expire */
+    key: 'koa:sess',
     maxAge: 86400000,
     autoCommit: true, /** (boolean) automatically commit headers (default true) */
     overwrite: true, /** (boolean) can overwrite or not (default true) */
@@ -49,6 +45,8 @@ render(app, {
     cache: config.ejs.cache,
     debug: config.ejs.debug
 });
+
+
 
 app.use(koaBody());
 

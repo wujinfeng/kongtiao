@@ -7,7 +7,7 @@ class Home {
         // this._ctx.body = 'login ok';
         await this._ctx.render('index', {
             // layout:'layout2',//模版
-            user: 'John',
+            user: '',
             nav: 'home',
             title:'标题'
         })

@@ -7,7 +7,7 @@ class User {
         // this._ctx.body = 'login ok';
         await this._ctx.render('login', {
             // layout:'layout2',//模版
-            user: 'John',
+            user: '',
             nav: '',
             title: '标题'
         })
@@ -15,13 +15,16 @@ class User {
 
     async login() {
         // this._ctx.body = 'login ok';
-        let email = this._ctx.request.body.email;
-        let password = this._ctx.request.body.password;
+        let body = this._ctx.request.body;
+       // let email = body.email;
+      //  let password = body.password;
+        let email = '1@1';
+        let password = '1';
         if (email === '1@1' && password === '1') {
-            this._ctx.session.user = {email: email};
-            await this._ctx.body = {code: 200, msg: 'ok'}
+             this._ctx.session.user =  email;
+             this._ctx.body = {code: 200, msg: 'ok'}
         } else {
-            await this._ctx.body = {code: 400, msg: '邮箱或密码错误！'}
+             this._ctx.body = {code: 400, msg: '邮箱或密码错误！'}
         }
     }
 
