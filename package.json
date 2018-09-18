@@ -28,6 +28,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "moment": "^2.22.2",
+    "nodemailer": "^4.6.8",
     "strip-ansi": "^4.0.0",
     "winston": "^3.0.0",
     "winston-daily-rotate-file": "^3.3.0"
