@@ -2,22 +2,18 @@ class User {
     constructor(ctx) {
         this._ctx = ctx;
     }
-
+    // 获取登录页面
     async loginPage() {
-        // this._ctx.body = 'login ok';
         await this._ctx.render('login', {
-            // layout:'layout2',//模版
             user: '',
-            nav: '',
-            title: '标题'
+            nav: ''
         })
     }
-
+    // 提交登录用户名密码
     async login() {
-        // this._ctx.body = 'login ok';
         let body = this._ctx.request.body;
        // let email = body.email;
-      //  let password = body.password;
+       //  let password = body.password;
         let email = '1@1';
         let password = '1';
         if (email === '1@1' && password === '1') {
@@ -28,25 +24,50 @@ class User {
         }
     }
 
+    // 获取注册页面
     async registerPage() {
-        // this._ctx.body = 'login ok';
         await this._ctx.render('register', {
-            // layout:'layout2',//模版
-            user: 'John',
-            nav: '',
-            title: '标题'
+            user: '',
+            nav: ''
         })
     }
 
+    // 提交注册信息
+    async register() {
+        let body = this._ctx.request.body;
+        // let email = body.email;
+        //  let password = body.password;
+        //  let code = body.code;
+        this._ctx.body = {code:200,msg:'邮箱不存在'};
+    }
+
+    // 检查邮箱是否存在
+    async checkEmail() {
+        let body = this._ctx.request;
+       //this._ctx.body = {code:400,msg:'邮箱已经存在'};
+       this._ctx.body = {code:200,msg:'邮箱不存在'};
+    }
+    // 重置密码页面
     async passwordPage() {
-        // this._ctx.body = 'login ok';
         await this._ctx.render('password', {
-            // layout:'layout2',//模版
-            user: 'John',
-            nav: '',
-            title: '标题'
+            user: '',
+            nav: ''
         })
     }
+    // 提交重置密码信息
+    async setPassword() {
+        let body = this._ctx.request.body;
+        // let email = body.email;
+        //  let password = body.password;
+        //  let code = body.code;
+        await this._ctx.render('index', {
+            user: 'John',
+            nav: ''
+        })
+    }
+
+
+
 }
 
 module.exports = User;

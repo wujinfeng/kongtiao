@@ -3,15 +3,24 @@ class About {
         this._ctx = ctx;
     }
 
-    async about() {
+    // 获取关于我们页面
+    async aboutPage() {
         // this._ctx.body = 'login ok';
         await this._ctx.render('about', {
-            // layout:'layout2',//模版
             user: 'John',
-            nav: 'about',
-            title:'标题'
+            nav: 'about'
         })
     }
+
+    // 提交信息 关于我们
+    async about() {
+        let body = this._ctx.request.body;
+        // let email = body.email;
+        //  let password = body.password;
+        //  let code = body.code;
+        this._ctx.body = {code:200,msg:'提交成功'};
+    }
+
 }
 
 module.exports = About;

@@ -3,13 +3,11 @@ class Copyright {
         this._ctx = ctx;
     }
 
+    // 版权页面
     async copyright() {
-        // this._ctx.body = 'login ok';
         await this._ctx.render('copyright', {
-            // layout:'layout2',//模版
-            user: 'John',
-            nav: '',
-            title:'标题'
+            user: '',
+            nav: ''
         })
     }
 }

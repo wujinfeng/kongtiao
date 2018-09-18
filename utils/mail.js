@@ -44,7 +44,7 @@ module.exports = {sendEmail}
 // test
 /* async function start() {
     try {
-        let code = Math.random().toString().slice(-4);
+        let code = Math.random().toString().slice(-6);
         let opt = {};
         opt.text = '尊敬的用户，您的验证码是' + code;
         opt.to = '923343669@qq.com';

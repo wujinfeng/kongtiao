@@ -4,14 +4,24 @@ class Home {
     }
 
     async home() {
-        // this._ctx.body = 'login ok';
         await this._ctx.render('index', {
-            // layout:'layout2',//模版
             user: '',
-            nav: 'home',
-            title:'标题'
+            nav: 'home'
         })
     }
+
+    //  提交查询参数
+    async query() {
+        let body = this._ctx.request.body;
+        //  let email = body.email;
+        //  let password = body.password;
+        //  let code = body.code;
+        await this._ctx.render('index', {
+            user: 'John',
+            nav: ''
+        })
+    }
+
 }
 
 module.exports = Home;
