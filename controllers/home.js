@@ -1,9 +1,9 @@
 const HomeModel = require('../model/HomeModel');
-const homeModel = new HomeModel();
 
 class Home {
     constructor(ctx) {
         this._ctx = ctx;
+        this.homeModel = new HomeModel();
     }
 
     async home() {
@@ -21,7 +21,7 @@ class Home {
         let params ={
             q: q
         };
-        let result = await homeModel.getList(params);
+        let result = await this.homeModel.getList(params);
         await this._ctx.render('index', {
             user: 'John',
             nav: 'home',

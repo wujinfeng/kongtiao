@@ -1,6 +1,11 @@
+const UserModel = require('../model/UserModel');
+const util = require('../utils/util');
+const emailUtil = require('../utils/mail');
+
 class User {
     constructor(ctx) {
         this._ctx = ctx;
+        this.userModel = new UserModel();
     }
     // 获取登录页面
     async loginPage() {
@@ -12,15 +17,31 @@ class User {
     // 提交登录用户名密码
     async login() {
         let body = this._ctx.request.body;
-       // let email = body.email;
-       //  let password = body.password;
-        let email = '1@1';
-        let password = '1';
-        if (email === '1@1' && password === '1') {
-             this._ctx.session.user =  email;
-             this._ctx.body = {code: 200, msg: 'ok'}
+        let email = body.email;
+        let password = body.password;
+
+        if (!email || !password) {
+            return this._ctx.body = {
+                code: 400,
+                msg: '请填写邮箱和密码'
+            };
+        }
+        password = util.md5(util.md5(password));
+        let result = await this.userModel.login({
+            emial,
+            password
+        });
+        if (result.length > 0) {
+            this._ctx.session.user = email;
+            this._ctx.body = {
+                code: 200,
+                msg: 'ok'
+            }
         } else {
-             this._ctx.body = {code: 400, msg: '邮箱或密码错误！'}
+            this._ctx.body = {
+                code: 400,
+                msg: '邮箱或密码错误！'
+            }
         }
     }
 
@@ -35,18 +56,74 @@ class User {
     // 提交注册信息
     async register() {
         let body = this._ctx.request.body;
-        // let email = body.email;
-        //  let password = body.password;
-        //  let code = body.code;
-        this._ctx.body = {code:200,msg:'邮箱不存在'};
+        let email = body.email;
+        let password = body.password;
+        let vcode = body.vcode;
+        let emailRes = await this.userModel.checkVcode({
+            email,
+            vcode
+        })
+        if (emailRes.length > 0) {
+            await this.userModel.register({
+                email,
+                password
+            });
+            this._ctx.body = {
+                code: 200,
+                msg: '注册成功'
+            };
+        } else {
+            this._ctx.body = {
+                code: 300,
+                msg: '验证码错误'
+            };
+        }
+
     }
 
     // 检查邮箱是否存在
     async checkEmail() {
         let body = this._ctx.request;
-       //this._ctx.body = {code:400,msg:'邮箱已经存在'};
-       this._ctx.body = {code:200,msg:'邮箱不存在'};
+        let email = body.email;
+        let result = await this.userModel.checkEmail({
+            email
+        });
+        if (result.length > 0) {
+            this._ctx.body = {
+                code: 400,
+                msg: '邮箱已经存在'
+            };
+        } else {
+            this._ctx.body = {
+                code: 200,
+                msg: '邮箱不存在'
+            };
+        }
     }
+
+    // 发送邮件
+    async sendEmail() {
+        let body = this._ctx.request;
+        let email = body.email;
+        let code = Math.random().toString().slice(-6);
+        let opt = {};
+        opt.text = '尊敬的用户，您的验证码是' + code + ',空调查询网。';
+        opt.to = email;
+        try {
+            await emailUtil.sendEmail(opt);
+            this._ctx.body = {
+                code: 400,
+                msg: '邮箱已经存在'
+            };
+        } catch (err) {
+            console.log(err)
+            this._ctx.body = {
+                code: 200,
+                msg: '邮箱不存在'
+            };
+        }
+    }
+
     // 重置密码页面
     async passwordPage() {
         await this._ctx.render('password', {
@@ -57,13 +134,28 @@ class User {
     // 提交重置密码信息
     async setPassword() {
         let body = this._ctx.request.body;
-        // let email = body.email;
-        //  let password = body.password;
-        //  let code = body.code;
-        await this._ctx.render('index', {
-            user: 'John',
-            nav: ''
+        let email = body.email;
+        let password = body.password;
+        let vcode = body.vcode;
+        let emailRes = await this.userModel.checkVcode({
+            email,
+            vcode
         })
+        if (emailRes.length > 0) {
+            await this.userModel.setPassword({
+                email,
+                password
+            });
+            this._ctx.body = {
+                code: 200,
+                msg: '保存成功'
+            };
+        } else {
+            this._ctx.body = {
+                code: 300,
+                msg: '验证码错误'
+            };
+        }
     }
 
 

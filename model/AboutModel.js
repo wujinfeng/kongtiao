@@ -1,6 +1,5 @@
 /**
- * 基础平台数据访问类
- * Created by fu_gh on 2017-10-11 16:09
+ * 关于我们
  */
 
 const BaseModel = require('./BaseModel');
@@ -8,14 +7,13 @@ const BaseModel = require('./BaseModel');
 class  HomeModel extends BaseModel {
 
     /**
-     * 通过型号数据
+     * 提交数据保存
      */
-    getList(params) {
+    save(params) {
         let self = this;
-        let sql = 'select id,name,url,sysName,platform from ' + self.baseDb + 'b_basis_platform where url=?';
-        let options = [params];
-        let sqlParam = self.getExecParamByOption(sql, options);
-        self.execSql(sqlParam);
+        let sql = 'insert into ' + self.baseDb + 'set ?';
+        let sqlParam = self.getExecParamByOption(sql, params);
+        return self.execSql(sqlParam);
     }
 
 
