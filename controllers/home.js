@@ -1,3 +1,6 @@
+const HomeModel = require('../model/HomeModel');
+const homeModel = new HomeModel();
+
 class Home {
     constructor(ctx) {
         this._ctx = ctx;
@@ -13,12 +16,16 @@ class Home {
     //  提交查询参数
     async query() {
         let body = this._ctx.request.body;
-        //  let email = body.email;
-        //  let password = body.password;
-        //  let code = body.code;
+        let q = body.q;
+
+        let params ={
+            q: q
+        };
+        let result = await homeModel.getList(params);
         await this._ctx.render('index', {
             user: 'John',
-            nav: ''
+            nav: 'home',
+            result: result
         })
     }
 

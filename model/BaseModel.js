@@ -21,7 +21,7 @@ class BaseModel {
      * @param param
      */
     execSql(param) {
-        Comm.execSql(config.baseDb, param);
+       return Comm.execSql(config.baseDb, param);
     }
 
     /**
