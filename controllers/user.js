@@ -27,12 +27,14 @@ class User {
             };
         }
         password = util.md5(util.md5(password));
+        console.log('password*******************',password)
         let result = await this.userModel.login({
-            emial,
+            email,
             password
         });
+        console.log('result:>>>>>>>>>>>>>>>>>>>>>>>>>>',result)
         if (result.length > 0) {
-            this._ctx.session.user = email;
+            this._ctx.session.user = {email:email, id: result[0].id};
             this._ctx.body = {
                 code: 200,
                 msg: 'ok'

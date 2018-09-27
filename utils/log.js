@@ -38,7 +38,7 @@ const logger = winston.createLogger({
     exceptionHandlers: [
         new winston.transports.File({filename: config.logDir + 'exceptions.log'})
     ],
-    exitOnError: true // 出错后，退出进程 process.exit()
+    exitOnError: false // 出错后，退出进程 process.exit()
 });
 
 // 测试

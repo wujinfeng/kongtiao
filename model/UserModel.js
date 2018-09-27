@@ -1,6 +1,5 @@
 /**
  * 基础平台数据访问类
- * Created by fu_gh on 2017-10-11 16:09
  */
 
 const BaseModel = require('./BaseModel');
@@ -12,7 +11,7 @@ class HomeModel extends BaseModel {
      */
     login(params) {
         let self = this;
-        let sql = 'select email  from ' + self.baseDb + 'user where email=? and password=?';
+        let sql = 'select email,id  from ' + self.baseDb + 'user where email=? and password=?';
         let sqlParam = self.getExecParamByOption(sql, [params.email, params.password]);
         return self.execSql(sqlParam);
     }
@@ -44,7 +43,7 @@ class HomeModel extends BaseModel {
         return self.execSql(sqlParam);
     }
     // 重置密码
-    async checkEmail(params) {
+    async setPassword(params) {
         let self = this;
         let sql = 'update ' + self.baseDb + 'user set password=? where email=?';
         let sqlParam = self.getExecParamByOption(sql, [params.password, params.email]);

@@ -7,15 +7,18 @@ class Home {
     }
 
     async home() {
+        let result = await this.homeModel.getData();
+        console.log(result)
         await this._ctx.render('index', {
             user: '',
-            nav: 'home'
+            nav: 'home',
+            result: result
         })
     }
 
     //  提交查询参数
     async query() {
-        let body = this._ctx.request.body;
+        let body = this._ctx.request.query;
         let q = body.q;
 
         let params ={

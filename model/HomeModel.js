@@ -16,6 +16,20 @@ class HomeModel extends BaseModel {
         return self.execSql(sqlParam)
     }
 
+    async getData() {
+        let self = this;
+        let sqlNews = 'select * from ' + self.baseDb + 'news order by ctime desc';
+        let sqlBrand = 'select * from ' + self.baseDb + 'brand order by ctime desc';
+        let sqlLink = 'select * from ' + self.baseDb + 'link order by ctime desc';
+        let pNews = self.getExecParamByOption(sqlNews, '');
+        let pBrand = self.getExecParamByOption(sqlBrand, '');
+        let pLink = self.getExecParamByOption(sqlLink, '');
+        let news = await self.execSql(pNews);
+        let brand = await self.execSql(pBrand);
+        let link = await self.execSql(pLink);
+        return {news, brand, link}
+    }
+
 
 }
 

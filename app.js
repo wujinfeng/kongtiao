@@ -16,7 +16,7 @@ const log = require('./utils/log');
 const allRoutes = require('./routes/index');
 
 const app = new koa();
-app.use(favicon(__dirname + '/public/favicon.ico'));
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.use(logger((str, args) => {
     args[0] = stripAnsi(args[0]);
@@ -25,30 +25,45 @@ app.use(logger((str, args) => {
 app.use(helmet());
 app.use(compress());
 app.use(koaStatic(__dirname + '/public'));
-app.keys = ['somesdfsdfsdf'];
-const CONFIG = {
-    key: 'koa:sess',
-    maxAge: 86400000,
-    autoCommit: true, /** (boolean) automatically commit headers (default true) */
-    overwrite: true, /** (boolean) can overwrite or not (default true) */
-    httpOnly: true, /** (boolean) httpOnly or not (default true) */
-    signed: true, /** (boolean) signed or not (default true) */
-    rolling: true, /** (boolean) Force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. (default is false) */
-    renew: true, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
-};
-app.use(session(CONFIG, app));
-
 render(app, {
-    root: path.join(__dirname, 'views'),
+    root: path.join(__dirname, '/views'),
     layout: 'layout',
     viewExt: 'html',
     cache: config.ejs.cache,
     debug: config.ejs.debug
 });
-
-
+app.keys = ['somesdfsdfsdf'];
+const CONFIG = {
+    key: 'koa:sess',
+    maxAge: 86400000,
+    autoCommit: true,
+    /** (boolean) automatically commit headers (default true) */
+    overwrite: true,
+    /** (boolean) can overwrite or not (default true) */
+    httpOnly: true,
+    /** (boolean) httpOnly or not (default true) */
+    signed: true,
+    /** (boolean) signed or not (default true) */
+    rolling: true,
+    /** (boolean) Force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. (default is false) */
+    renew: true, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
+};
+app.use(session(CONFIG, app));
 
 app.use(koaBody());
+
+app.use(async (ctx, next) => {
+    try {
+        console.log('ctx.state.user >>>', ctx.state.user);
+        console.log('ctx.session >>>', ctx.session);
+        await next();
+    } catch (err) {
+        if (err.name === "出现问题了") {
+            ctx.status = 400;
+            ctx.body = "没找到";
+        }
+    }
+});
 
 allRoutes(app);
 
