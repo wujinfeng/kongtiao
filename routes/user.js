@@ -36,4 +36,9 @@ router.get('/checkEmail', async (ctx)=>{
     await new user(ctx).checkEmail();
 });
 
+//发送邮件验证码
+router.get('/sendEmail', async (ctx)=>{
+    await new user(ctx).sendEmail();
+});
+
 module.exports = router;

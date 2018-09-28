@@ -11,11 +11,12 @@ class HomeModel extends BaseModel {
      */
     getList(params) {
         let self = this;
-        let sql = 'select * from ' + self.baseDb + 'air where model like ? or  brand like ?';
-        let sqlParam = self.getExecParamByOption(sql, ['%' + params.q + '%', '%' + params.q + '%'])
+        let sql = 'select * from ' + self.baseDb + 'air where type=? and title like ?';
+        let sqlParam = self.getExecParamByOption(sql, [params.type, '%' + params.queryText + '%']);
         return self.execSql(sqlParam)
     }
 
+    // 查询首页数据
     async getData() {
         let self = this;
         let sqlNews = 'select * from ' + self.baseDb + 'news order by ctime desc';

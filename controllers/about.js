@@ -1,5 +1,5 @@
 const AboutModel = require('../model/AboutModel');
- 
+
 class About {
     constructor(ctx) {
         this._ctx = ctx;
@@ -9,7 +9,6 @@ class About {
     // 获取关于我们页面
     async aboutPage() {
         await this._ctx.render('about', {
-            user: 'John',
             nav: 'about'
         })
     }

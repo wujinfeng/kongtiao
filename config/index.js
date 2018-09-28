@@ -1,5 +1,5 @@
 
-const env = 'dev';
+const env = 'qas';
 
 const config = require('./'+env)
 

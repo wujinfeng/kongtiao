@@ -5,16 +5,16 @@ const defaultOptions = {
     secure: true,
     port: 465,
     user: 'wujinfeng_auto@163.com',
-    pass: '',
+    pass: 'wjf123456',
     from: 'wujinfeng_auto@163.com',
-    to: '923343669@qq.com',
-    subject: '验证码',
-    text: 'hello'
+    to: '',
+    subject: '空调验证码',
+    text: ''
 };
 
 const sendEmail = function (options) {
     return new Promise(function (resolve, reject) {
-        options = Object.assign(defaultOptions, options);
+        options = Object.assign({}, defaultOptions, options);
         let transporter = nodemailer.createTransport({
             host: options.host,
             secure: options.secure,

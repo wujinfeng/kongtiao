@@ -6,7 +6,6 @@ class Copyright {
     // 版权页面
     async copyright() {
         await this._ctx.render('copyright', {
-            user: '',
             nav: ''
         })
     }

@@ -35,7 +35,7 @@ render(app, {
 app.keys = ['somesdfsdfsdf'];
 const CONFIG = {
     key: 'koa:sess',
-    maxAge: 86400000,
+    maxAge: 0, // 86400000
     autoCommit: true,
     /** (boolean) automatically commit headers (default true) */
     overwrite: true,
@@ -56,6 +56,7 @@ app.use(async (ctx, next) => {
     try {
         console.log('ctx.state.user >>>', ctx.state.user);
         console.log('ctx.session >>>', ctx.session);
+        ctx.state.user = ctx.session.user || {};
         await next();
     } catch (err) {
         if (err.name === "出现问题了") {

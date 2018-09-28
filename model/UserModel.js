@@ -30,7 +30,7 @@ class HomeModel extends BaseModel {
      */
     checkVcode(params) {
         let self = this;
-        let sql = 'select email from ' + self.baseDb + 'ver_code where  email=? and vcode=?';
+        let sql = 'select email from ' + self.baseDb + 'ver_code where  email=? and vcode=? order by ctime desc limit 1';
         let sqlParam = self.getExecParamByOption(sql, [params.email, params.vcode]);
         return self.execSql(sqlParam);
     }
@@ -47,6 +47,13 @@ class HomeModel extends BaseModel {
         let self = this;
         let sql = 'update ' + self.baseDb + 'user set password=? where email=?';
         let sqlParam = self.getExecParamByOption(sql, [params.password, params.email]);
+        return self.execSql(sqlParam);
+    }
+    // 保存验证码
+    async saveVcode(email, code){
+        let self = this;
+        let sql = 'insert into ' + self.baseDb + 'ver_code (email,vcode) values(?,?)';
+        let sqlParam = self.getExecParamByOption(sql, [email, code]);
         return self.execSql(sqlParam);
     }
 
