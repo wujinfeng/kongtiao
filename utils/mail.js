@@ -5,7 +5,7 @@ const defaultOptions = {
     secure: true,
     port: 465,
     user: 'wujinfeng_auto@163.com',
-    pass: 'wjf123456',
+    pass: '',
     from: 'wujinfeng_auto@163.com',
     to: '',
     subject: '空调验证码',
