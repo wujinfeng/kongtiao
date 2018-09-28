@@ -116,16 +116,24 @@ class User {
         opt.text = '尊敬的用户，您的验证码是' + code + ',空调查询网。';
         opt.to = email;
         try {
-            await this.userModel.saveVcode(email, code);
-            await emailUtil.sendEmail(opt);
-            this._ctx.body = {
-                code: 200,
-                msg: '发送成功，请查收！'
-            };
+            let myEmail = await this.userModel.checkEmail({email});
+            if (myEmail.length > 0) {
+                await this.userModel.saveVcode(email, code);
+                await emailUtil.sendEmail(opt);
+                this._ctx.body = {
+                    code: 200,
+                    msg: '发送成功，请查收！'
+                };
+            } else {
+                this._ctx.body = {
+                    code: 400,
+                    msg: '此邮箱没有注册过！'
+                };
+            }
         } catch (err) {
             console.log(err)
             this._ctx.body = {
-                code: 200,
+                code: 500,
                 msg: '发送失败，请重试！'
             };
         }
@@ -165,7 +173,6 @@ class User {
             };
         }
     }
-
 
 }
 

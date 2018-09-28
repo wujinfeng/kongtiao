@@ -1,14 +1,14 @@
 const nodemailer = require('nodemailer');
 
 const defaultOptions = {
-    host: 'smtp.163.com',
+    host: 'smtp.qq.com',
     secure: true,
     port: 465,
-    user: 'wujinfeng_auto@163.com',
-    pass: '',
-    from: 'wujinfeng_auto@163.com',
+    user: '744862253@qq.com',
+    pass: 'zscgcqdstzywbdch',
+    from: '744862253@qq.com',
     to: '',
-    subject: '空调验证码',
+    subject: '空调查询验证码',
     text: ''
 };
 
