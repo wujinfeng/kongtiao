@@ -21,8 +21,12 @@ class Home {
         let type = body.type;
         let queryText = body.queryText;
         let user = this._ctx.state.user;
-        console.log(user);
+        let isLogin = false;
+        if(user && user.email){
+            isLogin = true;
+        }
         let params = {
+            isLogin: isLogin,
             type: type,
             queryText: queryText
         };

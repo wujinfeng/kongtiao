@@ -11,7 +11,15 @@ class HomeModel extends BaseModel {
      */
     getList(params) {
         let self = this;
-        let sql = 'select * from ' + self.baseDb + 'air where type=? and title like ?';
+        let sql = '';
+        if (params.isLogin) {
+            sql = 'select * from ' + self.baseDb + 'air where type=? and title like ?';
+        } else {
+            sql = 'select id,name,alias,model,brand,place,product,cooling_mode,compressor,unit_category,purpose,refrigerating_capacity,heat_production,refrigeration_power,thermal_power,' +
+                'air_volume,cooling_capacity,heat_supply,static_pressure,' +
+                'tubes_num,residual_pressure from '
+                + self.baseDb + 'air where type=? and title like ?';
+        }
         let sqlParam = self.getExecParamByOption(sql, [params.type, '%' + params.queryText + '%']);
         return self.execSql(sqlParam)
     }
