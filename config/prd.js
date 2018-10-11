@@ -1,5 +1,5 @@
 module.exports = {
-    port: 3000,
+    port: 3001,
     ejs: {
         cache: true,
         debug: false
@@ -7,9 +7,9 @@ module.exports = {
     logDir: './logs/',
     mysqlService1: {
         host: '127.0.0.1',
-        user: 'root',
+        user: 'kongtiao',
         port: 3306,
-        password: '1234',
+        password: 'zye63sRxrxah847S',
         database: '',
     },
     baseDb: 'kongtiao',
