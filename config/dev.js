@@ -1,10 +1,11 @@
+const path = require('path');
 module.exports = {
     port: 3001,
     ejs: {
         cache: false,
         debug: true
     },
-    logDir: './logs/',
+    logDir: path.join(__dirname, '../logs/') ,
     mysqlService1: {
         host: '127.0.0.1',
         user: 'root',
